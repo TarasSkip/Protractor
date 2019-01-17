@@ -1,0 +1,11 @@
+{
+    "name": "MyFirstApp",
+    "version": "1.0.0",
+    "description": "",
+    "author": "",
+    "license": "ISC",
+    "dependencies": {},
+    "devDependencies": {
+        "protractor": "^5.4.2"
+    }
+}
