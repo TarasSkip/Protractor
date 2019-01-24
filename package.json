@@ -7,5 +7,8 @@
     "dependencies": {},
     "devDependencies": {
         "protractor": "^5.4.2"
+    },
+    "scripts": {
+        "ui-test": "./node_modules/.bin/protractor ./conf.js"
     }
 }
