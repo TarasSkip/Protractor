@@ -11,21 +11,18 @@ exports.config = {
     browserName: 'chrome'
   },
   onPrepare: async () => {
-    
+    await browser.restart();
+    browser.waitForAngularEnabled(false);
+
     jasmine.getEnv().addReporter(new AllureReporter({
       resultsDir: 'allure-results'
     }));
-    browser.waitForAngularEnabled(false);
-    console.log('test_started')
-
-    
+ 
     jasmine.getEnv().afterEach(async function () {
          let screen = await browser.takeScreenshot();
          await allure.createAttachment("Test screenshot", () => {
             return Buffer.from(screen, "base64")
-      }, "image/png")();
-      
-      
+      }, "image/png")();     
     });
   } 
 }

@@ -1,0 +1,49 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "node": true,
+        "jasmine": true
+      },
+      "globals": {
+        "browser": false,
+        "element": false,
+        "element.all": false,
+        "by": false,
+        "ExpectedConditions": false,
+        "ENV": false,
+        "actionsHelper": false,
+        "browserHelper": false,
+        "framework": false,
+        "customMatchers": false,
+        "dataGenerator": false,
+        "messages": false,
+        "consoleLogger": false,
+        "allure": false,
+        "allureWrapper": false,
+        "window": false,
+        "protractor": false
+    },
+      "rules": {
+        "linebreak-style": "off",
+        "prefer-const": "off",
+        "quotes": "off",
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "no-plusplus": "off",
+        "prefer-template": "off",
+        "comma-dangle": "off",
+        "eol-last": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "no-console": "off",
+        "max-len": ["error", { "code": 120, "ignoreComments": true, "ignoreTemplateLiterals": true }],
+        "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
+        "class-methods-use-this": "off",
+        "no-param-reassign": "off",
+        "global-require": "off",
+        "no-await-in-loop": "off",
+        "no-return-await": "off",
+        "no-restricted-syntax": "off",
+        "require-await": "error",
+        "no-var": "error"
+      }
+} 

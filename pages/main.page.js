@@ -1,52 +1,28 @@
+let BasePage = require('./base.page');
+let WebButton = require('../elements/button');
+
 let loginLinkLocator = by.css('.item-login');
-let loginFormEmailLocator = by.name('login');
-let loginFormPasswordLocator = by.name('password');
-let loginButtonLocator = by.css('input[type="submit"]');
 let accountNameLocator = by.css('span[class="name ellipsis"]');
 let baseUrl = 'https://hotline.ua/';
 
-class MainPage {
-    constructor() {
-    }
+class MainPage extends BasePage {
 
     // action methods
     async open() {
-        await browser.get(baseUrl);
+        await allure.createStep('Step 1 - open home page', async () => {
+            await browser.get(baseUrl);
+        })();        
     }
 
     async navigateToLogin() {
-        await this.getLoginLinkElement().click();
+        await allure.createStep('Step 2 - open login page', async () => {
+            await this.getLoginLinkElement().click();
+        })();
     }
-
-    async enterLogin(name) {
-        await this.getLoginFormEmailElement().sendKeys(name);
-    } 
-
-    async enterPassword(password) {
-        await this.getLoginFormPasswordElement().sendKeys(password);
-    } 
-
-    async clickLoginButton() {
-        await this.getLoginButtonElement().click();
-    }
-
-
-
+    
     // elements getters
     getLoginLinkElement() {
-        return element(loginLinkLocator);
-    }
-
-    getLoginFormEmailElement() {
-        return element(loginFormEmailLocator);
-    }
-
-    getLoginFormPasswordElement() {
-        return element(loginFormPasswordLocator);
-    }
-
-    getLoginButtonElement() {
-        return element(loginButtonLocator);
+        return new WebButton(element(loginLinkLocator), "Login Link");
     }
 
     getAccountNameElement() {
