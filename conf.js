@@ -1,4 +1,6 @@
 // conf.js
+let AllureReporter = require('jasmine-allure-reporter');
+
 exports.config = {
   SELENIUM_PROMISE_MANAGER: false,
   framework: 'jasmine',
@@ -8,8 +10,22 @@ exports.config = {
   capabilities: {
     browserName: 'chrome'
   },
-  onPrepare: () => {
+  onPrepare: async () => {
+    
+    jasmine.getEnv().addReporter(new AllureReporter({
+      resultsDir: 'allure-results'
+    }));
     browser.waitForAngularEnabled(false);
     console.log('test_started')
-  }
+
+    
+    jasmine.getEnv().afterEach(async function () {
+         let screen = await browser.takeScreenshot();
+         await allure.createAttachment("Test screenshot", () => {
+            return Buffer.from(screen, "base64")
+      }, "image/png")();
+      
+      
+    });
+  } 
 }
