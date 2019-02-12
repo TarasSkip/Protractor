@@ -12,6 +12,7 @@ exports.config = {
   },
   onPrepare: async () => {
     await browser.restart();
+    await browser.manage().setTimeouts({ implicit: 5000 });
     browser.waitForAngularEnabled(false);
 
     jasmine.getEnv().addReporter(new AllureReporter({
