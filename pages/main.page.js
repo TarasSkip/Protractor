@@ -6,12 +6,11 @@ let accountNameLocator = by.css('span[class="name ellipsis"]');
 let baseUrl = 'https://hotline.ua/';
 
 class MainPage extends BasePage {
-
     // action methods
     async open() {
         await allure.createStep('Step 1 - open home page', async () => {
             await browser.get(baseUrl);
-        })();        
+        })();
     }
 
     async navigateToLogin() {
@@ -19,7 +18,7 @@ class MainPage extends BasePage {
             await this.getLoginLinkElement().click();
         })();
     }
-    
+
     // elements getters
     getLoginLinkElement() {
         return new WebButton(element(loginLinkLocator), "Login Link");

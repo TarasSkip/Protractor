@@ -8,10 +8,10 @@ let loginButtonLocator = by.css('input[type="submit"]');
 
 class LoginPage extends BasePage {
     // action methods
-    async login(email, pass) {
+    async login(email, password) {
         await allure.createStep(`Step 3 - proceed with login '${email}'`, async () => {
             await this.enterLogin(email);
-            await this.enterPassword(pass);
+            await this.enterPassword(password);
             await this.clickLoginButton();
         })();
     }
@@ -34,11 +34,11 @@ class LoginPage extends BasePage {
     }
 
     getLoginFormPasswordElement() {
-        return element(loginFormPasswordLocator);
+        return new WebInput(element(loginFormPasswordLocator), "Password input");
     }
 
     getLoginButtonElement() {
-        return element(loginButtonLocator);
+        return new WebInput(element(loginButtonLocator), "Login button");
     }
 }
 
