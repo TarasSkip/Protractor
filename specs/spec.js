@@ -11,5 +11,6 @@ describe('Protractor Demo App', () => {
         await LoginPage.waitForLoginToBeClickable();
         await LoginPage.login(email, password);
         expect(await MainPage.getAccountNameElement().getText()).toEqual('vasyapupkin446');
+        
     });
 });
