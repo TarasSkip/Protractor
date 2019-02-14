@@ -7,6 +7,10 @@ let loginButtonLocator = by.css('input[type="submit"]');
 
 
 class LoginPage extends BasePage {
+    async waitForLoginToBeClickable() {
+        await this.getLoginButtonElement().waitForElementToBeClickable(100000);
+    }
+
     // action methods
     async login(email, password) {
         await allure.createStep(`Step 3 - proceed with login '${email}'`, async () => {

@@ -8,6 +8,7 @@ describe('Protractor Demo App', () => {
         await MainPage.open();
         await MainPage.waitForPageToBeAvailable();
         await MainPage.navigateToLogin();
+        await LoginPage.waitForLoginToBeClickable();
         await LoginPage.login(email, password);
         expect(await MainPage.getAccountNameElement().getText()).toEqual('vasyapupkin446');
     });
