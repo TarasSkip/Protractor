@@ -23,6 +23,7 @@ class MainPage extends BasePage {
         })();
     }
 
+
     // elements getters
     getLoginLinkElement() {
         return new WebButton(element(loginLinkLocator), "Login Link");

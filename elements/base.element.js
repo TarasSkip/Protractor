@@ -16,7 +16,7 @@ class BaseElement {
 
     async waitForElementToBeClickable(timeout2) {
         let EC = protractor.ExpectedConditions;
-        browser.wait(EC.elementToBeClickable(this.protractorElement), timeout2);
+        await browser.wait(EC.elementToBeClickable(this.protractorElement), timeout2);
     }
 }
 

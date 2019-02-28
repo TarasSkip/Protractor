@@ -4,7 +4,7 @@ let WebInput = require('../elements/input');
 let loginFormEmailLocator = by.name('login');
 let loginFormPasswordLocator = by.name('password');
 let loginButtonLocator = by.css('input[type="submit"]');
-
+let registrationLinkLocator = by.css('body > div.wrapper > div.content.row > div > div.viewbox > div.text > p > a');
 
 class LoginPage extends BasePage {
     async waitForLoginToBeClickable() {
@@ -32,6 +32,12 @@ class LoginPage extends BasePage {
         await this.getLoginButtonElement().click();
     }
 
+    async navigateToRegistration() {
+        await allure.createStep('Step 2 - open registration page', async () => {
+            await this.getRegistrationLinkElement().click();
+        })();
+    }
+
     // elements getters
     getLoginFormEmailElement() {
         return new WebInput(element(loginFormEmailLocator), "Email input");
@@ -43,6 +49,10 @@ class LoginPage extends BasePage {
 
     getLoginButtonElement() {
         return new WebInput(element(loginButtonLocator), "Login button");
+    }
+
+    getRegistrationLinkElement() {
+        return new WebInput(element(registrationLinkLocator), "Registration Link");
     }
 }
 

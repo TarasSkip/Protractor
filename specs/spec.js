@@ -3,7 +3,7 @@ let LoginPage = require("../pages/login.page");
 
 describe('Protractor Demo App', () => {
     it('Login test', async () => {
-        let email = 'vasyapupkin446@gmail.com';
+        let email = `vasyapupkin446@gmail.com`;
         let password = 'vasyapupkin';
         await MainPage.open();
         await MainPage.waitForPageToBeAvailable();
