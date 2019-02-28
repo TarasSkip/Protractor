@@ -4,7 +4,7 @@ let WebInput = require('../elements/input');
 let loginFormEmailLocator = by.name('login');
 let loginFormPasswordLocator = by.name('password');
 let loginButtonLocator = by.css('input[type="submit"]');
-let registrationLinkLocator = by.css('body > div.wrapper > div.content.row > div > div.viewbox > div.text > p > a');
+let registrationLinkLocator = by.css('a[href*="register"]');
 
 class LoginPage extends BasePage {
     async waitForLoginToBeClickable() {

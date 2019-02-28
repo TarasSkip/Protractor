@@ -1,11 +1,12 @@
 let BasePage = require('./base.page');
 let WebInput = require('../elements/input');
+let TextBox = require('../elements/text');
 
 let registrationFormEmailLocator = by.name('email');
 let registrationFormPasswordLocator = by.name('password');
 let registrationFormNicknameLocator = by.name('login');
 let registrationButtonLocator = by.css('input[type="submit"]');
-let registrationTextLocator = by.css('body > div.wrapper > div.content.row > div > div > div > div.cell-4.cell-md > p');
+let registrationTextLocator = by.css('.h3');
 
 
 class RegistrationPage extends BasePage {
@@ -40,6 +41,7 @@ class RegistrationPage extends BasePage {
     }
 
 
+
     // elements getters
     getRegistrationFormEmailElement() {
         return new WebInput(element(registrationFormEmailLocator), "Email input");
@@ -58,7 +60,7 @@ class RegistrationPage extends BasePage {
     }
 
     getRegistrationTextElement() {
-        return element(registrationTextLocator);
+        return new TextBox(element(registrationTextLocator), "Check text");
     }
 }
 
