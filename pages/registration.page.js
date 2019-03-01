@@ -1,13 +1,12 @@
 let BasePage = require('./base.page');
 let WebInput = require('../elements/input');
-let TextBox = require('../elements/text');
+let TextBox = require('../elements/textBox');
 
 let registrationFormEmailLocator = by.name('email');
 let registrationFormPasswordLocator = by.name('password');
 let registrationFormNicknameLocator = by.name('login');
 let registrationButtonLocator = by.css('input[type="submit"]');
 let registrationTextLocator = by.css('.h3');
-
 
 class RegistrationPage extends BasePage {
     async waitForRegisterToBeClickable() {
@@ -39,8 +38,6 @@ class RegistrationPage extends BasePage {
     async clickRegistrationButton() {
         await this.getRegistrationButtonElement().click();
     }
-
-
 
     // elements getters
     getRegistrationFormEmailElement() {
