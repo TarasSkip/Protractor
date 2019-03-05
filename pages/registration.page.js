@@ -8,17 +8,46 @@ let registrationFormNicknameLocator = by.name('login');
 let registrationButtonLocator = by.css('input[type="submit"]');
 let registrationTextLocator = by.css('.h3');
 
+let registrationFormErrorTextLocator = by.css('div.errors');
+//  let registrationFormPasswordErrorTextLocator = by.css('.errors');
+//  let registrationFormNicknameErrorTextLocator = by.css('.errors');
+
 class RegistrationPage extends BasePage {
     async waitForRegisterToBeClickable() {
         await this.getRegistrationButtonElement().waitForElementToBeClickable(100000);
     }
 
+
     // action methods
-    async registration(email, password, nickname) {
+    async registration(email, password, nickname) { //  SUCCESSFULL registration scenario
         await allure.createStep(`Step 3 - proceed with registration '${email}' '${nickname}'`, async () => {
             await this.enterLogin(email);
             await this.enterPassword(password);
             await this.enterNickname(nickname);
+            await this.clickRegistrationButton();
+        })();
+    }
+
+    async registrationWithBadEmail(bademail) { //   UNsuccessfull registration scenario
+        await allure.createStep(`Step 3 - entering bad email format '${bademail}'`, async () => {
+            await this.enterLogin(bademail);
+            await this.clickRegistrationButton();
+        })();
+    }
+
+    async registrationWithUsedEmail(usedemail) { // UNsuccessfull registration scenario
+        await allure.createStep(`Step 4 - entering already used email '${usedemail}'`, async () => {
+            //  await this.clearRegistrationFormEmailElement();
+            await this.enterLogin(usedemail);
+            await this.clickRegistrationButton();
+        })();
+    }
+
+    async registrationWithIncorrectPassword(email, nickname, badpassword) { //  UNsuccessfull registration scenario
+        await allure.createStep(`Step 5 - entering correct email '${email}', nickname '${nickname}' and bad '${badpassword}'`, async () => {
+            await this.enterLogin(email);
+            await this.enterNickname(nickname);
+            await this.enterPassword(badpassword);
             await this.clickRegistrationButton();
         })();
     }
@@ -39,6 +68,11 @@ class RegistrationPage extends BasePage {
         await this.getRegistrationButtonElement().click();
     }
 
+    async clearRegistrationFormEmailElement() {
+        await this.getRegistrationFormEmailElement().clear();
+    }
+
+
     // elements getters
     getRegistrationFormEmailElement() {
         return new WebInput(element(registrationFormEmailLocator), "Email input");
@@ -58,6 +92,14 @@ class RegistrationPage extends BasePage {
 
     getRegistrationTextElement() {
         return new TextBox(element(registrationTextLocator), "Check text");
+    }
+
+    registrationFormEmailErrorTextElement() {
+        return new TextBox(element(registrationFormErrorTextLocator), "Email error text");
+    }
+
+    registrationFormPasswordErrorTextElement() {
+        return new TextBox(element(registrationFormErrorTextLocator), "Password error text");
     }
 }
 
