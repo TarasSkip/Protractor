@@ -20,7 +20,8 @@ class RegistrationPage extends BasePage {
 
     // action methods
     async registration(email, password, nickname) { //  SUCCESSFULL registration scenario
-        await allure.createStep(`Step 3 - proceed with registration '${email}' '${nickname}'`, async () => {
+        await allure.createStep(`Registration attempt with: email - '${email}', password - '${password}', nickname - '${nickname}'`, async () => {
+            await this.clearRegistrationFormEmailElement();
             await this.enterLogin(email);
             await this.enterPassword(password);
             await this.enterNickname(nickname);
@@ -28,32 +29,8 @@ class RegistrationPage extends BasePage {
         })();
     }
 
-    async registrationWithBadEmail(bademail) { //   UNsuccessfull registration scenario
-        await allure.createStep(`Step 3 - entering bad email format '${bademail}'`, async () => {
-            await this.enterLogin(bademail);
-            await this.clickRegistrationButton();
-        })();
-    }
-
-    async registrationWithUsedEmail(usedemail) { // UNsuccessfull registration scenario
-        await allure.createStep(`Step 4 - entering already used email '${usedemail}'`, async () => {
-            //  await this.clearRegistrationFormEmailElement();
-            await this.enterLogin(usedemail);
-            await this.clickRegistrationButton();
-        })();
-    }
-
-    async registrationWithIncorrectPassword(email, nickname, badpassword) { //  UNsuccessfull registration scenario
-        await allure.createStep(`Step 5 - entering correct email '${email}', nickname '${nickname}' and bad '${badpassword}'`, async () => {
-            await this.enterLogin(email);
-            await this.enterNickname(nickname);
-            await this.enterPassword(badpassword);
-            await this.clickRegistrationButton();
-        })();
-    }
-
-    async enterLogin(name) {
-        await this.getRegistrationFormEmailElement().sendKeys(name);
+    async enterLogin(email) {
+        await this.getRegistrationFormEmailElement().sendKeys(email);
     }
 
     async enterPassword(password) {
