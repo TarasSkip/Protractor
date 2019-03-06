@@ -19,7 +19,7 @@ class RegistrationPage extends BasePage {
 
 
     // action methods
-    async registration(email, password, nickname) { //  SUCCESSFULL registration scenario
+    async registration(email = '', password = '', nickname = '') { //  SUCCESSFULL registration scenario
         await allure.createStep(`Registration attempt with: email - '${email}', password - '${password}', nickname - '${nickname}'`, async () => {
             await this.clearRegistrationFormEmailElement();
             await this.enterLogin(email);

@@ -20,9 +20,9 @@ describe('Protractor Demo App', () => {
         //  Registration attempts
         await RegistrationPage.clickRegistrationButton();
         expect(await RegistrationPage.registrationFormEmailErrorTextElement().getText()).toEqual('Заполните это поле');
-        await RegistrationPage.registration(bademail, '', '');
+        await RegistrationPage.registration(bademail);
         expect(await RegistrationPage.registrationFormEmailErrorTextElement().getText()).toEqual('Поле не соответствует формату');
-        await RegistrationPage.registration(usedemail, '', '');
+        await RegistrationPage.registration(usedemail);
         expect(await RegistrationPage.registrationFormEmailErrorTextElement().getText()).toEqual('Извините, но такой e-mail уже занят');
         await RegistrationPage.registration(newemail, badpassword, newnickname);
         expect(await RegistrationPage.registrationFormPasswordErrorTextElement().getText()).toEqual('Длина поля не может быть меньше 4 и больше 16 символов');
