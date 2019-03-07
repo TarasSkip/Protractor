@@ -13,7 +13,7 @@ class LoginPage extends BasePage {
 
     // action methods
     async login(email, password) {
-        await allure.createStep(`Step 3 - proceed with login '${email}'`, async () => {
+        await allure.createStep(`Proceed with login '${email}'`, async () => {
             await this.enterLogin(email);
             await this.enterPassword(password);
             await this.clickLoginButton();
@@ -33,7 +33,7 @@ class LoginPage extends BasePage {
     }
 
     async navigateToRegistration() {
-        await allure.createStep('Step 2 - open registration page', async () => {
+        await allure.createStep('Open registration page', async () => {
             await this.getRegistrationLinkElement().click();
         })();
     }

@@ -8,14 +8,20 @@ let registrationFormNicknameLocator = by.name('login');
 let registrationButtonLocator = by.css('input[type="submit"]');
 let registrationTextLocator = by.css('.h3');
 
+let registrationFormErrorTextLocator = by.css('div.errors');
+//  let registrationFormPasswordErrorTextLocator = by.css('.errors');
+//  let registrationFormNicknameErrorTextLocator = by.css('.errors');
+
 class RegistrationPage extends BasePage {
     async waitForRegisterToBeClickable() {
         await this.getRegistrationButtonElement().waitForElementToBeClickable(100000);
     }
 
+
     // action methods
-    async registration(email, password, nickname) {
-        await allure.createStep(`Step 3 - proceed with registration '${email}' '${nickname}'`, async () => {
+    async registration(email = '', password = '', nickname = '') { //  SUCCESSFULL registration scenario
+        await allure.createStep(`Registration attempt with: email - '${email}', password - '${password}', nickname - '${nickname}'`, async () => {
+            await this.clearRegistrationFormEmailElement();
             await this.enterLogin(email);
             await this.enterPassword(password);
             await this.enterNickname(nickname);
@@ -23,8 +29,8 @@ class RegistrationPage extends BasePage {
         })();
     }
 
-    async enterLogin(name) {
-        await this.getRegistrationFormEmailElement().sendKeys(name);
+    async enterLogin(email) {
+        await this.getRegistrationFormEmailElement().sendKeys(email);
     }
 
     async enterPassword(password) {
@@ -38,6 +44,11 @@ class RegistrationPage extends BasePage {
     async clickRegistrationButton() {
         await this.getRegistrationButtonElement().click();
     }
+
+    async clearRegistrationFormEmailElement() {
+        await this.getRegistrationFormEmailElement().clear();
+    }
+
 
     // elements getters
     getRegistrationFormEmailElement() {
@@ -59,6 +70,11 @@ class RegistrationPage extends BasePage {
     getRegistrationTextElement() {
         return new TextBox(element(registrationTextLocator), "Check text");
     }
+
+    registrationFormErrorTextElement() {
+        return new TextBox(element(registrationFormErrorTextLocator), "Error text message");
+    }
+
 }
 
 module.exports = new RegistrationPage();
