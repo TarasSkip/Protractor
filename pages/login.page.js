@@ -70,12 +70,8 @@ class LoginPage extends BasePage {
     }
 
     //  TextBox element getters
-    getLoginFormEmailErrorTextElement() {
-        return new TextBox(element(loginFormErrorTextLocator), "Email error text");
-    }
-
-    getLoginFormPasswordErrorTextElement() {
-        return new TextBox(element(loginFormErrorTextLocator), "Password error text");
+    getLoginFormErrorTextElement() {
+        return new TextBox(element(loginFormErrorTextLocator), "Error text message");
     }
 
     getLoginFormBEErrorTextElement() {
