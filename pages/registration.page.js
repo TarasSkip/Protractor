@@ -71,13 +71,10 @@ class RegistrationPage extends BasePage {
         return new TextBox(element(registrationTextLocator), "Check text");
     }
 
-    registrationFormEmailErrorTextElement() {
-        return new TextBox(element(registrationFormErrorTextLocator), "Email error text");
+    registrationFormErrorTextElement() {
+        return new TextBox(element(registrationFormErrorTextLocator), "Error text message");
     }
 
-    registrationFormPasswordErrorTextElement() {
-        return new TextBox(element(registrationFormErrorTextLocator), "Password error text");
-    }
 }
 
 module.exports = new RegistrationPage();
