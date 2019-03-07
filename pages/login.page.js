@@ -1,10 +1,14 @@
 let BasePage = require('./base.page');
 let WebInput = require('../elements/input');
+let TextBox = require('../elements/textBox');
 
 let loginFormEmailLocator = by.name('login');
 let loginFormPasswordLocator = by.name('password');
 let loginButtonLocator = by.css('input[type="submit"]');
 let registrationLinkLocator = by.css('a[href*="register"]');
+
+let loginFormErrorTextLocator = by.css('div.errors');
+let loginFormBEErrorTextLocator = by.css('div.item-error');
 
 class LoginPage extends BasePage {
     async waitForLoginToBeClickable() {
@@ -12,9 +16,11 @@ class LoginPage extends BasePage {
     }
 
     // action methods
-    async login(email, password) {
-        await allure.createStep(`Step 3 - proceed with login '${email}'`, async () => {
+    async login(email = '', password = '') {
+        await allure.createStep(`Login attempt with email '${email}' and password '${password}'`, async () => {
+            await this.clearLoginFormEmailElement();
             await this.enterLogin(email);
+            await this.clearLoginFormPasswordElement();
             await this.enterPassword(password);
             await this.clickLoginButton();
         })();
@@ -33,12 +39,20 @@ class LoginPage extends BasePage {
     }
 
     async navigateToRegistration() {
-        await allure.createStep('Step 2 - open registration page', async () => {
+        await allure.createStep('Open registration page', async () => {
             await this.getRegistrationLinkElement().click();
         })();
     }
 
-    // elements getters
+    async clearLoginFormEmailElement() {
+        await this.getLoginFormEmailElement().clear();
+    }
+
+    async clearLoginFormPasswordElement() {
+        await this.getLoginFormPasswordElement().clear();
+    }
+
+    //  WebInput element getters
     getLoginFormEmailElement() {
         return new WebInput(element(loginFormEmailLocator), "Email input");
     }
@@ -53,6 +67,19 @@ class LoginPage extends BasePage {
 
     getRegistrationLinkElement() {
         return new WebInput(element(registrationLinkLocator), "Registration Link");
+    }
+
+    //  TextBox element getters
+    getLoginFormEmailErrorTextElement() {
+        return new TextBox(element(loginFormErrorTextLocator), "Email error text");
+    }
+
+    getLoginFormPasswordErrorTextElement() {
+        return new TextBox(element(loginFormErrorTextLocator), "Password error text");
+    }
+
+    getLoginFormBEErrorTextElement() {
+        return new TextBox(element(loginFormBEErrorTextLocator), "Backend error text");
     }
 }
 

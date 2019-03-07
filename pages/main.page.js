@@ -12,13 +12,13 @@ class MainPage extends BasePage {
 
     // action methods
     async open() {
-        await allure.createStep('Step 1 - open home page', async () => {
+        await allure.createStep('Open home page', async () => {
             await browser.get(baseUrl);
         })();
     }
 
     async navigateToLogin() {
-        await allure.createStep('Step 2 - open login page', async () => {
+        await allure.createStep('Open login page', async () => {
             await this.getLoginLinkElement().click();
         })();
     }
