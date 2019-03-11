@@ -2,6 +2,7 @@ let MainPage = require("../pages/main.page");
 let LoginPage = require("../pages/login.page");
 let RegistrationPage = require("../pages/registration.page");
 
+
 describe('Hotline Protractor Test - Registration suite', () => {
     it('Registration test - TC #2. Create account (negative)', async () => {
         let rand = Math.round(Math.random() * 10000000);
