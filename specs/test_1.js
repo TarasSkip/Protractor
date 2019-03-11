@@ -4,7 +4,7 @@ let RegistrationPage = require("../pages/registration.page");
 
 describe('Hotline Protractor Test - Registration suite', () => {
     it('Registration test - TC #1. Create account (positive)', async () => {
-        let rand = Math.round(Math.random() * 100000);
+        let rand = Math.round(Math.random() * 1000000);
         let email = `vasyapupkin446+${rand}@gmail.com`;
         let password = 'vasyapupkin';
         let nickname = `vasyapupkin${rand}`;
