@@ -71,7 +71,7 @@ class RegistrationPage extends BasePage {
         return new TextBox(element(registrationTextLocator), "Check text");
     }
 
-    registrationFormErrorTextElement() {
+    getRegistrationFormErrorTextElement() {
         return new TextBox(element(registrationFormErrorTextLocator), "Error text message");
     }
 
