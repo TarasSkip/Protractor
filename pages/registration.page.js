@@ -74,7 +74,6 @@ class RegistrationPage extends BasePage {
     getRegistrationFormErrorTextElement() {
         return new TextBox(element(registrationFormErrorTextLocator), "Error text message");
     }
-
 }
 
 module.exports = new RegistrationPage();
