@@ -2,7 +2,7 @@ let BasePage = require('./base.page');
 let TextBox = require('../elements/textBox');
 let WebButton = require('../elements/button');
 
-let searchResultsFirstLinkLocator = by.css('.products-list > li:nth-child(1) > div.item-info > p > a');
+let searchResultsFirstLinkLocator = by.css('.product-item:nth-child(1) .h4 a');
 let itemPageHeaderLocator = by.css('div.heading > h1');
 
 class SearchResultsPage extends BasePage {
@@ -12,19 +12,10 @@ class SearchResultsPage extends BasePage {
 
     // action methods
     async getSearchResults() {
-        await allure.createStep(`Getting search results (check that found '> 0' items)`, async () => {
-            let string = await this.getPageHeaderElement().getText();
-            let num = await string.replace(/[^0-9]/g, '');
-            let int = await parseInt(num, 10);
-            if (int > 0) {
-                console.log(`Search string match '${int}' items`);
-                int = true;
-            } else {
-                console.log('No search results!!!');
-                int = false;
-            }
-            expect(int).toBe(true);
-        })();
+        let string = await this.getPageHeaderElement().getText();
+        let num = string.replace(/[^0-9]/g, '');
+        let int = parseInt(num, 10);
+        return int;
     }
 
     async clickRegistrationButton() {

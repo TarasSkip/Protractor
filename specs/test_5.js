@@ -7,7 +7,7 @@ describe('Hotline Protractor Test - Search suite', () => {
         await MainPage.waitForPageToBeAvailable();
         await MainPage.search('samsung galaxy');
         await SearchResultsPage.waitForSearchPageToBeAvailable();
-        await SearchResultsPage.getSearchResults();
+        expect(await SearchResultsPage.getSearchResults()).toBeGreaterThan(0);
         await SearchResultsPage.clickSearchResultsFirstLink();
         expect(await SearchResultsPage.getPageHeaderElement().getText()).toContain('Samsung Galaxy');
     });
