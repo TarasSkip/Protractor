@@ -1,6 +1,7 @@
 let BasePage = require('./base.page');
 let WebButton = require('../elements/button');
 let WebInput = require('../elements/input');
+let TextBox = require('../elements/textBox');
 
 let loginLinkLocator = by.css('.item-login');
 let accountNameLocator = by.css('span[class="name ellipsis"]');
@@ -8,6 +9,12 @@ let baseUrl = 'https://hotline.ua/';
 
 let searchField = by.css('#searchbox');
 let searchButton = by.css('#doSearch');
+
+let categoryDachaLocator = by.css('.level-1.dacha_sad');
+let subCategoryPoolLocator = by.xpath("//*[contains(text(), 'Бассейны, пруды, фонтаны')]");
+let subSubCategoryPumpLocator = by.css('a[href*="/dacha_sad/nasosy-vodosnabzheniya/46036/"]');
+
+let cartItemsCountLocator = by.css('.item-cart .count');
 
 class MainPage extends BasePage {
     async waitForPageToBeAvailable() {
@@ -47,6 +54,23 @@ class MainPage extends BasePage {
         await this.getSearchButtonElement().click();
     }
 
+    async clickSubCategoryPool() {
+        await this.getSubCategoryPoolElement().click();
+    }
+
+    async clickSubSubCategoryPump() {
+        await this.getSubSubCategoryPumpElement().click();
+    }
+
+
+    async navigateToSubSubCategoryPump() {
+        await allure.createStep(`Navigate to "Dacha/sad -> Pool -> Pump" category`, async () => {
+            await this.getCategoryDachaElement().mouseMove();
+            await this.clickSubCategoryPool();
+            await this.clickSubSubCategoryPump();
+        })();
+    }
+
     // elements getters
     getLoginLinkElement() {
         return new WebButton(element(loginLinkLocator), "Login Link");
@@ -62,6 +86,22 @@ class MainPage extends BasePage {
 
     getSearchButtonElement() {
         return new WebButton(element(searchButton), "Search button");
+    }
+
+    getCategoryDachaElement() {
+        return new WebButton(element(categoryDachaLocator), "Dacha/sad category");
+    }
+
+    getSubCategoryPoolElement() {
+        return new WebButton(element(subCategoryPoolLocator), "Pool subcategory");
+    }
+
+    getSubSubCategoryPumpElement() {
+        return new WebButton(element(subSubCategoryPumpLocator), "Pump subSubCategory");
+    }
+
+    getCartItemsCountElement() {
+        return new TextBox(element(cartItemsCountLocator), "Cart items count");
     }
 }
 

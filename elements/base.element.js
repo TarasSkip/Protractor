@@ -14,9 +14,26 @@ class BaseElement {
         await browser.wait(EC.visibilityOf(this.protractorElement), timeout);
     }
 
-    async waitForElementToBeClickable(timeout2) {
+    async waitForElementToBeClickable(timeout) {
         let EC = protractor.ExpectedConditions;
-        await browser.wait(EC.elementToBeClickable(this.protractorElement), timeout2);
+        await browser.wait(EC.elementToBeClickable(this.protractorElement), timeout);
+    }
+
+    async mouseMove() {
+        await browser.actions().mouseMove(this.protractorElement).perform();
+        console.log(`Hover on "${this.elementName}"`);
+    }
+
+    async getCssValue(val) {
+        let value = await this.protractorElement.getCssValue(val);
+        console.log(`Getting "${this.elementName}" CSS value`);
+        return value;
+    }
+
+    async getAttribute(attr) {
+        let attribute = await this.protractorElement.getAttribute(attr);
+        console.log(`Getting "${this.elementName}" attribute`);
+        return attribute;
     }
 }
 

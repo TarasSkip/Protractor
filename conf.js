@@ -5,11 +5,18 @@ exports.config = {
   SELENIUM_PROMISE_MANAGER: false,
   framework: 'jasmine',
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['./specs/test_5.js'],
+  specs: ['./specs/test_7.js'],
 
   capabilities: {
     browserName: 'chrome'
   },
+  
+  jasmineNodeOpts: {
+    defaultTimeoutInterval: 180000
+  },
+
+  //  allScriptsTimeout: 180000,
+
   onPrepare: async () => {
     await browser.restart();
     await browser.manage().setTimeouts({ implicit: 5000 });
