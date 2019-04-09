@@ -103,6 +103,7 @@ class MainPage extends BasePage {
     getCartItemsCountElement() {
         return new TextBox(element(cartItemsCountLocator), "Cart items count");
     }
+
 }
 
 module.exports = new MainPage();
