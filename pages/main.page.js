@@ -1,7 +1,6 @@
 let BasePage = require('./base.page');
 let WebButton = require('../elements/button');
 let WebInput = require('../elements/input');
-let HoverElement = require('../elements/hoverElement');
 
 let loginLinkLocator = by.css('.item-login');
 let accountNameLocator = by.css('span[class="name ellipsis"]');
@@ -87,7 +86,7 @@ class MainPage extends BasePage {
     }
 
     getCategoryDachaElement() {
-        return new HoverElement(element(categoryDachaLocator), "Dacha/sad category");
+        return new WebButton(element(categoryDachaLocator), "Dacha/sad category");
     }
 
     getSubCategoryPoolElement() {

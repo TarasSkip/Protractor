@@ -20,7 +20,7 @@ describe('Hotline Protractor Test - Work with card suite', () => {
         await ProductsCatalogPage.waitForBuyNowButtonToBeAvailable();
         await ProductsCatalogPage.ckickBuyNowButon();
         await CartPage.waitForPageToBeAvailable();
-        expect(await CartPage.getHeaderElement().getText()).toEqual('Корзина');
+        expect(await CartPage.getCartHeaderElement().getText()).toEqual(' Корзина');
         //  expect(await CartPage.getProductAmountElement().getAttribute('value')).toBe('1'); - works but commented - the same account used here, cart should be cleared before each run (next TC)
         await CartPage.selectNPDelivery();
         await CartPage.selectNPDeliveryDepartment();

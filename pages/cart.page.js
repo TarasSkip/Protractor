@@ -4,7 +4,8 @@ let TextBox = require('../elements/textBox');
 let DropDown = require('../elements/drop-down');
 
 let orderButtonLocator = by.css('a[href="/checkout"]');
-let headerLocator = by.css('h1');
+let headerLocator = by.css('div > h1');
+let cartHeaderLocator = by.css('.inline.text-x-lg');
 let productAmountLocator = by.css('.field[type = "number"]');
 let deliveryOptionsDDLocator = by.css('select.m_b-sm');
 let NPDepartmentDDLocator = by.name('warehouseNP');
@@ -50,6 +51,10 @@ class CartPage extends BasePage {
 
     getHeaderElement() {
         return new TextBox(element(headerLocator), "Page header");
+    }
+
+    getCartHeaderElement() {
+        return new TextBox(element(cartHeaderLocator), "Cart header");
     }
 
     getProductAmountElement() {
