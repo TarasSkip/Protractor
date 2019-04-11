@@ -2,8 +2,13 @@ let BasePage = require('./base.page');
 let WebButton = require('../elements/button');
 let CheckBox = require('../elements/checkBox');
 
+let CartPage = require("../pages/cart.page");
+
 let buyOnHotlineCheckboxLocator = by.css('label[for="checkout-checkbox-mobile"]');
 let thirdItemInCatalogLocator = by.css('.product-item:nth-child(3) .h4 a');
+let secondItemInCatalogLocator = by.css('.product-item:nth-child(2) .h4 a');
+let firstItemInCatalogLocator = by.css('.product-item:nth-child(1) .h4 a');
+
 let buyNowButtonLocator = by.css('span.m_b-sm');
 
 class ProductsCatalogPage extends BasePage {
@@ -28,6 +33,28 @@ class ProductsCatalogPage extends BasePage {
         })();
     }
 
+    async addThreeItemsToCart() { //    Preconditions. TODO - optimize
+        await allure.createStep('Add three items to cart', async () => {
+            await this.checkBuyOnHotlineCheckbox();
+            await this.getThirdItemInCatalogElement().click();
+            await this.waitForBuyNowButtonToBeAvailable();
+            await this.ckickBuyNowButon();
+            await CartPage.waitForPageToBeAvailable();
+            await browser.navigate().back();
+            await browser.navigate().back();
+            await this.getSecondItemInCatalogElement().click();
+            await this.waitForBuyNowButtonToBeAvailable();
+            await this.ckickBuyNowButon();
+            await CartPage.waitForPageToBeAvailable();
+            await browser.navigate().back();
+            await browser.navigate().back();
+            await this.getFirstItemInCatalogElement().click();
+            await this.waitForBuyNowButtonToBeAvailable();
+            await this.ckickBuyNowButon();
+            await CartPage.waitForPageToBeAvailable();
+        })();
+    }
+
     async ckickBuyNowButon() {
         await allure.createStep('Click "Buy Now" button', async () => {
             await this.getBuyNowButtonElement().click();
@@ -41,6 +68,15 @@ class ProductsCatalogPage extends BasePage {
 
     getThirdItemInCatalogElement() {
         return new WebButton(element(thirdItemInCatalogLocator), "3rd item in Catalog");
+    }
+
+
+    getSecondItemInCatalogElement() {
+        return new WebButton(element(secondItemInCatalogLocator), "2nd item in Catalog");
+    }
+
+    getFirstItemInCatalogElement() {
+        return new WebButton(element(firstItemInCatalogLocator), "1st item in Catalog");
     }
 
     getBuyNowButtonElement() {

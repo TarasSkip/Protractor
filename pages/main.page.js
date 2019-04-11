@@ -1,6 +1,7 @@
 let BasePage = require('./base.page');
 let WebButton = require('../elements/button');
 let WebInput = require('../elements/input');
+let TextBox = require('../elements/textBox');
 
 let loginLinkLocator = by.css('.item-login');
 let accountNameLocator = by.css('span[class="name ellipsis"]');
@@ -12,6 +13,8 @@ let searchButton = by.css('#doSearch');
 let categoryDachaLocator = by.css('.level-1.dacha_sad');
 let subCategoryPoolLocator = by.xpath("//*[contains(text(), 'Бассейны, пруды, фонтаны')]");
 let subSubCategoryPumpLocator = by.css('a[href*="/dacha_sad/nasosy-vodosnabzheniya/46036/"]');
+
+let cartItemsCountLocator = by.css('.item-cart .count');
 
 class MainPage extends BasePage {
     async waitForPageToBeAvailable() {
@@ -96,6 +99,11 @@ class MainPage extends BasePage {
     getSubSubCategoryPumpElement() {
         return new WebButton(element(subSubCategoryPumpLocator), "Pump subSubCategory");
     }
+
+    getCartItemsCountElement() {
+        return new TextBox(element(cartItemsCountLocator), "Cart items count");
+    }
+
 }
 
 module.exports = new MainPage();
