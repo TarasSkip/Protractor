@@ -15,10 +15,10 @@ let cartContentTextLocator = by.css('.m_b-md .h4');
 let goToCartButtonLocator = by.css('a[href="/cart/"]');
 
 let deleteFirstCartItemInPopupLocator = by.css('.li-scroll .row-indent:nth-child(1) i');
-
 let ItemsInCartLocator = by.css('.row-indent[data-order-item]'); //  All items
-
 let deleteLastCartItemLocator = by.css('div[data-cart-content] .row-indent:nth-last-child(2) i'); //  Last item on Cart page
+
+let cartBusyLocator = by.css('[data-dropdown-target="cart"].busy');
 
 class CartPage extends BasePage {
     // timeout methods
@@ -40,6 +40,11 @@ class CartPage extends BasePage {
 
     async waitForCartItemToBeClickable() {
         await this.getCartItemElement().waitForElementToBeClickable(10000);
+    }
+
+    async waitForCartToBeAvailable() {
+        await this.getCartBusyElement().waitElementPresence(10000);
+        await this.getCartBusyElement().waitElementStaleness(10000);
     }
 
     // action methods
@@ -141,6 +146,10 @@ class CartPage extends BasePage {
 
     getDeleteLastCartItemElement() {
         return new WebButton(element(deleteLastCartItemLocator), "Delete last item in cart (on Cart page)");
+    }
+
+    getCartBusyElement() {
+        return new WebButton(element(cartBusyLocator), "Cart busy");
     }
 }
 

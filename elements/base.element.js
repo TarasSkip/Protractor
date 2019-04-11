@@ -19,6 +19,16 @@ class BaseElement {
         await browser.wait(EC.elementToBeClickable(this.protractorElement), timeout);
     }
 
+    async waitElementStaleness(timeout) {
+        let EC = protractor.ExpectedConditions;
+        await browser.wait(EC.stalenessOf(this.protractorElement), timeout);
+    }
+
+    async waitElementPresence(timeout) {
+        let EC = protractor.ExpectedConditions;
+        await browser.wait(EC.presenceOf(this.protractorElement), timeout);
+    }
+
     async mouseMove() {
         await browser.actions().mouseMove(this.protractorElement).perform();
         console.log(`Hover on "${this.elementName}"`);
