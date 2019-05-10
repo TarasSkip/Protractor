@@ -9,6 +9,12 @@ class BaseElement {
         await this.protractorElement.click();
     }
 
+    async count() {
+        console.log(`Count "${this.elementName}"`);
+        let number = await this.protractorElement.count();
+        return number;
+    }
+
     async waitForElementToBeVisible(timeout) {
         let EC = protractor.ExpectedConditions;
         await browser.wait(EC.visibilityOf(this.protractorElement), timeout);
@@ -44,6 +50,11 @@ class BaseElement {
         let attribute = await this.protractorElement.getAttribute(attr);
         console.log(`Getting "${this.elementName}" attribute`);
         return attribute;
+    }
+
+    async map() {
+        console.log(`Mapping "${this.elementName}"`);
+        await this.protractorElement.map();
     }
 }
 

@@ -16,6 +16,8 @@ let subSubCategoryPumpLocator = by.css('a[href*="/dacha_sad/nasosy-vodosnabzheni
 
 let cartItemsCountLocator = by.css('.item-cart .count');
 
+let feedbackLinkLocator = by.css('a[href="/feedback/"]');
+
 class MainPage extends BasePage {
     async waitForPageToBeAvailable() {
         await this.getLoginLinkElement().waitForElementToBeVisible(10000);
@@ -62,12 +64,21 @@ class MainPage extends BasePage {
         await this.getSubSubCategoryPumpElement().click();
     }
 
-
     async navigateToSubSubCategoryPump() {
         await allure.createStep(`Navigate to "Dacha/sad -> Pool -> Pump" category`, async () => {
             await this.getCategoryDachaElement().mouseMove();
             await this.clickSubCategoryPool();
             await this.clickSubSubCategoryPump();
+        })();
+    }
+
+    async clickFeedbackLink() {
+        await allure.createStep('Click feedback link', async () => {
+            await this.getFeedbackLinkElement().click();
+            await this.getFeedbackLinkElement().click(); // In 95% does not work on first click... (maybe scroll should be used here)
+            //  await browser.getWindowHandle();
+            let handles = await browser.getAllWindowHandles();
+            await browser.switchTo().window(handles[1]);
         })();
     }
 
@@ -104,6 +115,9 @@ class MainPage extends BasePage {
         return new TextBox(element(cartItemsCountLocator), "Cart items count");
     }
 
+    getFeedbackLinkElement() {
+        return new WebButton(element(feedbackLinkLocator), "Feedback link");
+    }
 }
 
 module.exports = new MainPage();
