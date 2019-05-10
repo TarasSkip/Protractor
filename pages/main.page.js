@@ -77,9 +77,8 @@ class MainPage extends BasePage {
             await this.getFeedbackLinkElement().click();
             await this.getFeedbackLinkElement().click(); // In 95% does not work on first click... (maybe scroll should be used here)
             //  await browser.getWindowHandle();
-            await browser.getAllWindowHandles().then(async (handles) => {
-                await browser.switchTo().window(handles[1]);
-            });
+            let handles = await browser.getAllWindowHandles();
+            await browser.switchTo().window(handles[1]);
         })();
     }
 
