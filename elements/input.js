@@ -10,6 +10,11 @@ class WebInput extends BaseElement {
         console.log(`Clearing text in input "${this.elementName}"`);
         await this.protractorElement.clear();
     }
+
+    //  async selectAll() {
+    //      console.log(`Select all text in input "${this.elementName}"`);
+    //      await this.protractorElement.selectAll();
+    //  }
 }
 
 module.exports = WebInput;
